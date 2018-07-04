@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "start": "pm2 start api.js",
+    "start_prod": "pm2 start api.js -i max",
+    "stop":"pm2 delete -f api",
+    "restart": "pm2 restart api",
+    "logs": "pm2 logs api",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mysql": "^2.15.0",
+    "pm2": "^2.10.4",
+    "sc2-sdk": "^1.0.2",
+    "steem": "^0.7.1"
+  }
+}
