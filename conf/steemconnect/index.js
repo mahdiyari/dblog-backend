@@ -1,10 +1,12 @@
 // Steemconnect initialization
-const sc2 = require('sc2-sdk');
-const config = require('../../config');
+const sc2 = require('sc2-sdk')
+// import config file
+const config = require('../../config')
 const api = sc2.Initialize({
-    app: config.sc2.app,
-    callbackURL: config.sc2.callbackURL,
-    scope: config.sc2.scope
-});
+  app: config.sc2.app, // app name
+  callbackURL: config.sc2.callbackURL, // callback url
+  scope: config.sc2.scope // scope
+})
 
-module.exports = api;
+// export api to import in the other files
+module.exports = api

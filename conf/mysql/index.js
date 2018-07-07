@@ -1,12 +1,14 @@
 // MySQL connection
-const mysql = require('mysql');
-const config = require('../../config');
+const mysql = require('mysql')
+// import config file
+const config = require('../../config')
 var con = mysql.createConnection({
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.pw,
-    database: config.db.name,
-    charset: "utf8mb4"
-});
+  host: config.db.host, // MySQL host
+  user: config.db.user, // MySQL username
+  password: config.db.pw, // MySQL password
+  database: config.db.name, // MySQL database
+  charset: 'utf8mb4' // MySQL charset (fix possible charset errors)
+})
 
-module.exports = con;
+// export con to import in the other files
+module.exports = con

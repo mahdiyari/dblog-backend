@@ -1,23 +1,23 @@
 // All variables may need changes in the future
-var config = {};
-config.db = {};
+var config = {}
+config.db = {}
 // MySQL details
-config.db.pw = '';
-config.db.user = 'root';
-config.db.host = '127.0.0.1';
-config.db.name = 'dblog';
-//wifkey
-config.wifkey = '';
-//steemconnect
-config.sc2 = {};
-config.sc2.app = 'steem.app';
-config.sc2.callbackURL = 'https://dblog.io';
-config.sc2.scope = ['login'];
+config.db.pw = 'mysql' // MySQL password
+config.db.user = 'root' // MySQL username
+config.db.host = '127.0.0.1' // MySQL host
+config.db.name = 'dblog' // MySQL database
+// possible wifkey
+config.wifkey = ''
+// steemconnect
+config.sc2 = {}
+config.sc2.app = 'steem.app' // app name
+config.sc2.callbackURL = 'https://dblog.io' // callback url
+config.sc2.scope = ['login'] // scopes
 // RPC nodes
-config.rpc = 'ws://127.0.0.1:8090';
-config.rpc2 = 'ws://127.0.0.1:8090';
-config.rpc3 = 'ws://127.0.0.1:8090';
-config.rpchttp = 'http://127.0.0.1:8090';
-config.nodejssrv = 'http://127.0.0.1';
+// main RPC node (websocket)
+config.rpc = 'ws://rpc.buildteam.io:8090'
+// RPC node (http)
+config.rpchttp = 'http://rpc.buildteam.io:8090'
 
-module.exports = config;
+// export config to use in the other files
+module.exports = config

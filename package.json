@@ -6,7 +6,7 @@
   "scripts": {
     "start": "pm2 start api.js",
     "start_prod": "pm2 start api.js -i max",
-    "stop":"pm2 delete -f api",
+    "stop": "pm2 delete -f api",
     "restart": "pm2 restart api",
     "logs": "pm2 logs api",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,5 +21,8 @@
     "pm2": "^2.10.4",
     "sc2-sdk": "^1.0.2",
     "steem": "^0.7.1"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
   }
 }
