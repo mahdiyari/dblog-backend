@@ -35,13 +35,9 @@ const setOrGetHashKey = ({ res, uid, username, error, results }) => {
     const exists = results[0][0]
     console.log('exists = ' + exists)
     if (exists) { // Get hash_key from database
-      RetrieveHash(uid, username, (result) => {
-        res.status(200).send(result)
-      })
+      RetrieveHash(uid, username, res)
     } else { // Generate new hash_key
-      SetHash(uid, username, (result) => {
-        res.status(200).send(result)
-      })
+      SetHash(uid, username, res)
     }
   }
 }
