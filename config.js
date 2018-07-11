@@ -15,9 +15,9 @@ config.sc2.callbackURL = 'https://dblog.io' // callback url
 config.sc2.scope = ['login'] // scopes
 // RPC nodes
 // main RPC node (websocket)
-config.rpc = 'ws://rpc.buildteam.io:8090'
+config.rpc = 'ws://rpc2.steemviz.com:8090'
 // RPC node (http)
-config.rpchttp = 'http://rpc.buildteam.io:8090'
+config.rpchttp = 'http://rpc2.steemviz.com:8090'
 
 // export config to use in the other files
 module.exports = config

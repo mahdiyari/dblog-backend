@@ -1,14 +1,37 @@
-// MySQL connection
+// creating a MySQL pool which will handle up to 1,000 connections
+// connections more than 1,000 will be added to the queue
 const mysql = require('mysql')
-// import config file
 const config = require('../../config')
-var con = mysql.createConnection({
-  host: config.db.host, // MySQL host
-  user: config.db.user, // MySQL username
-  password: config.db.pw, // MySQL password
-  database: config.db.name, // MySQL database
-  charset: 'utf8mb4' // MySQL charset (fix possible charset errors)
+// changed from connection to the pool
+const pool = mysql.createPool({
+  connectionLimit: 1000,
+  host: config.db.host,
+  user: config.db.user,
+  password: config.db.pw,
+  database: config.db.name,
+  charset: 'utf8mb4'
 })
 
-// export con to import in the other files
+// Rewriting MySQL query method as a promise
+const con = {}
+con.query = async (query, val) => {
+  if (val) {
+    let qu = await new Promise((resolve, reject) => {
+      pool.query(query, val, (error, results) => {
+        if (error) reject(new Error(error))
+        resolve(results)
+      })
+    })
+    return qu
+  } else {
+    let qu = await new Promise((resolve, reject) => {
+      pool.query(query, (error, results) => {
+        if (error) reject(new Error(error))
+        resolve(results)
+      })
+    })
+    return qu
+  }
+}
+
 module.exports = con
