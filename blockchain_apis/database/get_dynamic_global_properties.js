@@ -7,15 +7,11 @@ const config = require('../../config')
 // set custon RPC node which is in the /config.js
 steem.api.setOptions({ url: config.rpc })
 
+// Process get requests
 router.get('/', (req, res) => {
-  // Process get requests
-  // Set JSON header
   res.set('Content-Type', 'application/json')
-  // make call to the RPC node
-  // return GlobalProperties in the response
   steem.api.getDynamicGlobalPropertiesAsync()
-    .then(result => res.status(200).send(JSON.stringify(result)))
-    // catch possible errors
+    .then(result => res.status(200).json(result))
     .catch(e => res.send('RPC node error!'))
 })
 

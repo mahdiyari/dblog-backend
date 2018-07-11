@@ -3,9 +3,11 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const globalProps = require('./blockchain_apis/database/get_dynamic_global_properties.js')
-const confirmProcess = require('./login_apis/confirm_process')
-app.use(bodyParser.json()) // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+const loginApis = require('./login_apis')
+// support json encoded bodies
+app.use(bodyParser.json())
+// support encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -15,7 +17,7 @@ app.use((req, res, next) => {
 
 // Adding APIs
 app.use('/api/database/get_dynamic_global_properties', globalProps)
-app.use('/api/login/confirm_process', confirmProcess)
+app.use('/api/login/confirm_process', loginApis)
 
 // Listening
 const host = process.env.HOST || '127.0.0.1'
