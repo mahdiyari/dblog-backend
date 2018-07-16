@@ -1,0 +1,16 @@
+{
+  "apps": [
+    {
+      "name": "main-api",
+      "script": "./api.js",
+      "exec_mode": "cluster",
+      "instances": 4,
+      "node_args": "--max-old-space-size=2192"
+    },
+    {
+      "name": "sync-api",
+      "script": "./stream_sync.js",
+      "node_args": "--max-old-space-size=8192"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ config.sc2.scope = ['login'] // scopes
 config.rpc = 'ws://rpc2.steemviz.com:8090'
 // RPC node (http)
 config.rpchttp = 'http://rpc2.steemviz.com:8090'
+config.stream_sync = 'http://127.0.0.1:4938'
 
 // export config to use in the other files
 module.exports = config
