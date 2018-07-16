@@ -4,6 +4,7 @@ const router = express.Router()
 const api = require('../conf/steemconnect')
 const con = require('../conf/mysql')
 const crypto = require('crypto')
+const syncUser = require('./sync_user')
 
 // Process post requests
 // This will receive user's id, name, access_token and optional hash_key
@@ -59,6 +60,7 @@ router.post('/', (req, res) => {
       error: 1,
       message: err
     })
+    console.error(err)
   }
 })
 const setOrGetHashKey = async ({ uid, username, results }) => {
@@ -137,20 +139,25 @@ const isAuth = async () => {
 // First time login
 // Generating new hash_key
 const SetHash = async (uid, username) => {
-  // Create random hex string (hash_key)
-  const hash = crypto.randomBytes(20).toString('hex')
-  // call to steemconnect
-  // to verify user is logged in
-  let auth = await isAuth()
-  let id = await auth.account.id
-  let user = await auth.user
-  if (uid === id && user === username) {
-    let results = await con.query(
-      'INSERT INTO `users`(`uid`, `username`, `hash_key`) VALUES (?,?,?)',
-      [uid, username, hash]
-    )
-    if (results) return hash
-    else throw new Error('db insert fail')
+  try {
+    // Create random hex string (hash_key)
+    const hash = crypto.randomBytes(20).toString('hex')
+    // call to steemconnect
+    // to verify user is logged in
+    let auth = await isAuth()
+    let id = await auth.account.id
+    let user = await auth.user
+    if (uid === id && user === username) {
+      await con.query(
+        'INSERT INTO `users`(`uid`, `username`, `hash_key`) VALUES (?,?,?)',
+        [uid, username, hash]
+      )
+      // It is first login, start syncing user data
+      syncUser(username, uid)
+      return hash
+    }
+  } catch (err) {
+    throw new Error(err)
   }
 }
 
