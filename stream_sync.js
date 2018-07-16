@@ -96,7 +96,7 @@ const insertPostToDb = async (author, permlink) => {
       let exists = results[0]
       for (let i in exists) exists = exists[i]
       if (!exists) {
-        let index = postsIndex()
+        let index = await postsIndex()
         posts[index] = post.id
         await con.query(
           'INSERT INTO `posts`' +
@@ -139,7 +139,7 @@ const insertCommentToDb = async (author, permlink) => {
       let exists = results[0]
       for (let i in exists) exists = exists[i]
       if (!exists) {
-        let index = postsIndex()
+        let index = await postsIndex()
         posts[index] = comment.id
         await con.query(
           'INSERT INTO `comments`' +
