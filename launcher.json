@@ -3,8 +3,8 @@
     {
       "name": "main-api",
       "script": "./api.js",
-      "exec_mode": "cluster",
-      "instances": 4,
+      "exec_mode": "fork",
+      "instances": 1,
       "node_args": "--max-old-space-size=2192"
     },
     {

@@ -4,6 +4,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const globalProps = require('./blockchain_apis/database/get_dynamic_global_properties.js')
 const loginApis = require('./login_apis')
+const getBlogPosts = require('./posts_apis/getBlogPosts')
 // support json encoded bodies
 app.use(bodyParser.json())
 // support encoded bodies
@@ -15,11 +16,10 @@ app.use((req, res, next) => {
   next()
 })
 
-// Adding APIs
 app.use('/api/database/get_dynamic_global_properties', globalProps)
 app.use('/api/login/confirm_process', loginApis)
+app.use('/api/posts/getBlogPosts', getBlogPosts)
 
-// Listening
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 4939
 app.listen(port, host, () => console.log(`App listening on ${host}:${port}`))
